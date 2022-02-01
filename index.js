@@ -3,6 +3,7 @@ const exphbs = require("express-handlebars");
 const todos = require("./data/TodoTasks.js");
 
 const app = express();
+app.use(express.json());
 
 app.engine(
   "hbs",
@@ -14,6 +15,8 @@ app.engine(
 
 app.set("view engine", "hbs");
 app.use(express.static("public"));
+
+/* ? */
 app.use(express.urlencoded({ extended: true }));
 
 function getNewId(list) {
@@ -44,9 +47,19 @@ app.get("/:id", (req, res) => {
 
 app.post("/newtask", (req, res) => {
   const id = getNewId(todos);
+  const todaysDate = new Date();
   const newTodo = {
     id: id,
-    created: "idag",
+    created:
+      todaysDate.getFullYear() +
+      "-" +
+      parseInt(todaysDate.getMonth() + 1) +
+      "-" +
+      todaysDate.getDate() +
+      " " +
+      todaysDate.getHours() +
+      ":" +
+      todaysDate.getMinutes(),
     description: req.body.description,
     done: false,
   };

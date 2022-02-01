@@ -1,19 +1,19 @@
 const todos = [
   {
     id: 1,
-    created: "",
-    description: "Mata katten",
+    created: "2022-2-1 13:23",
+    description: "Klappa katten",
     done: false,
   },
   {
     id: 2,
-    created: "",
+    created: "2022-2-1 18:56",
     description: "Göra läxan",
     done: false,
   },
   {
     id: 3,
-    created: "",
+    created: "2022-2-1 20:39",
     description: "Dricka kaffe",
     done: false,
   },
