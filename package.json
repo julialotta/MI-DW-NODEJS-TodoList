@@ -1,0 +1,19 @@
+{
+  "name": "inlamning-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/julialotta/MI-DW-NODEJS-TodoList.git"
+  },
+  "author": "Julia-Lotta Tinglöf",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/julialotta/MI-DW-NODEJS-TodoList/issues"
+  },
+  "homepage": "https://github.com/julialotta/MI-DW-NODEJS-TodoList#readme"
+}
