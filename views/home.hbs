@@ -1,0 +1,10 @@
+<form action="/newtask" method="post">
+  <input type="text" name="description" placeholder="description" />
+</form>
+
+<ul>
+  {{#each todos}}
+    <li>
+      <a href="/{{id}}">{{created}}+{{description}}+{{done}}</a></li>
+  {{/each}}
+</ul>
