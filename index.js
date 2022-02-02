@@ -43,16 +43,12 @@ app.get("/completedtasks", (req, res) => {
 });
 
 app.get("/descending", (req, res) => {
-  todos.sort((a, b) => {
-    return a.created - b.created;
-  });
+  todos.sort((a, b) => (a.created > b.created ? 1 : -1));
   res.render("home", { todos });
 });
 
 app.get("/ascending", (req, res) => {
-  todos.sort((a, b) => {
-    return b.created - a.created;
-  });
+  todos.sort((a, b) => (a.created > b.created ? -1 : 1));
   res.render("home", { todos });
 });
 
