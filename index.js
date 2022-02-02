@@ -5,7 +5,7 @@ const morgan = require("morgan");
 
 const app = express();
 app.use(express.json());
-app.use(morgan("common"));
+/* app.use(morgan("common")); */
 
 app.engine(
   "hbs",
@@ -47,6 +47,7 @@ function getDate() {
 }
 
 app.get("/", (req, res) => {
+  console.log(todos);
   res.render("home", { todos });
 });
 
@@ -86,6 +87,7 @@ app.get("/:id/edit", (req, res) => {
 app.post("/:id/edit", (req, res) => {
   const id = parseInt(req.params.id);
   const index = todos.findIndex((i) => i.id === id);
+  todos[index].created = req.body.created;
   todos[index].description = req.body.description;
   if (req.body.done) {
     todos[index].done = true;

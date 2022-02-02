@@ -1,13 +1,13 @@
 <h2>Uncompleted Tasks:</h2>
-<p>¯\_(ツ)_/¯</p>
 
 <ul>
   {{#each todos}}
-  {{#if done}}
-  <p>You don't have any Uncompleted tasks <3</p>
-  {{/if}}
-  {{else}}
-    <li>
-      <a href="/{{id}}">{{created}} + {{description}} + <input type="checkbox" name="done" id="done" value="{{done}}" {{#if done}}checked{{/if}}</a></li>
+    {{#if done}}{{else}}
+      <li>
+        <a href="/{{id}}">{{created}} - {{description}}
+        <input type="checkbox" name="done" disabled="disabled" value="{{done}}" {{#if done}}checked{{/if}}>
+        </a>
+      </li>
+    {{/if}}
   {{/each}}
 </ul>

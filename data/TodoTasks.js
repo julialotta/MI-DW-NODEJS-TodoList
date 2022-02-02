@@ -3,7 +3,7 @@ const todos = [
     id: 1,
     created: "2022-2-1 13:23",
     description: "Klappa katten",
-    done: false,
+    done: true,
   },
   {
     id: 2,

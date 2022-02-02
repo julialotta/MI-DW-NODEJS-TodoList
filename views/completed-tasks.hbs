@@ -1,12 +1,17 @@
 <h2>Completed Tasks:</h2>
 
+
 <ul>
   {{#each todos}}
-  {{#if done}}
-    <li>
-      <a href="/{{id}}">{{created}} + {{description}} + <input type="checkbox" name="done" id="done" value="{{done}}" {{#if done}}checked{{/if}}</a></li>
-  {{/if}}
-  {{else}}
-  <p>You don't have any completed tasks... yet.</p>
+    {{#if done}}
+      <li>
+        <a href="/{{id}}">{{created}} - {{description}}
+        <input type="checkbox" name="done" disabled="disabled" value="{{done}}" {{#if done}}checked{{/if}}>
+        </a>
+      </li>
+    {{/if}}
   {{/each}}
 </ul>
+
+
+

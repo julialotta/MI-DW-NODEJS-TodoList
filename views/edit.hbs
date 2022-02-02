@@ -1,6 +1,12 @@
 <h2>Edit task</h2>
 
 <form action="/{{id}}/edit" method="post">
+<input
+    type="datetime-local"
+    name="created"
+    placeholder="created"
+    value="{{created}}"
+  />
   <input
     type="text"
     name="description"
