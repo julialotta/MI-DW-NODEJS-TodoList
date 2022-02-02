@@ -88,6 +88,19 @@ app.post("/:id/edit", (req, res) => {
   res.redirect("/" + id);
 });
 
+app.get("/:id/delete", (req, res) => {
+  const id = parseInt(req.params.id);
+  const index = todos.find((i) => i.id === id);
+  res.render("delete", index);
+});
+
+app.post("/:id/delete", (req, res) => {
+  const id = parseInt(req.params.id);
+  const index = todos.findIndex((i) => i.id === id);
+  todos.splice(index, 1);
+  res.redirect("/");
+});
+
 app.listen(8000, () => {
   console.log("http://localhost:8000");
 });
