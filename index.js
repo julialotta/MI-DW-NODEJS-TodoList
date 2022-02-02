@@ -1,9 +1,11 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const todos = require("./data/TodoTasks.js");
+const morgan = require("morgan");
 
 const app = express();
 app.use(express.json());
+app.use(morgan("common"));
 
 app.engine(
   "hbs",
@@ -17,7 +19,7 @@ app.set("view engine", "hbs");
 app.use(express.static("public"));
 
 /* vad betyder extended? */
-app.use(express.urlencoded(/* { extended: false } */));
+app.use(express.urlencoded({ extended: false }));
 
 function getNewId(list) {
   let maxId = 0;
@@ -85,6 +87,11 @@ app.post("/:id/edit", (req, res) => {
   const id = parseInt(req.params.id);
   const index = todos.findIndex((i) => i.id === id);
   todos[index].description = req.body.description;
+  if (req.body.done) {
+    todos[index].done = true;
+  } else {
+    todos[index].done = false;
+  }
   res.redirect("/" + id);
 });
 
@@ -104,29 +111,3 @@ app.post("/:id/delete", (req, res) => {
 app.listen(8000, () => {
   console.log("http://localhost:8000");
 });
-
-/* 
-app.post("/intakter/:id/ta-bort", (req, res) => {
-  const id = parseInt(req.params.id);
-  const income = incomes.find((i) => i.id === id);
-  incomes.splice(income, 1);
-  res.redirect("/intakter");
-});
-
-app.get("/intakter/:id/redigera", (req, res) => {
-  const id = parseInt(req.params.id);
-  const index = incomes.find((i) => i.id === id);
-
-  res.render("incomes-edit", index);
-});
-
-app.post("/intakter/:id/redigera", (req, res) => {
-  const id = parseInt(req.params.id);
-  const index = incomes.findIndex((i) => i.id === id);
-  incomes[index].title = req.body.title;
-  incomes[index].value = req.body.value;
-
-  res.redirect("/intakter/" + id);
-});
-
- */

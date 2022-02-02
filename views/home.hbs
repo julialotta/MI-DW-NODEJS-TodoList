@@ -7,6 +7,9 @@
 <ul>
   {{#each todos}}
     <li>
-      <a href="/{{id}}">{{created}} + {{description}} + {{done}}</a></li>
+      <a href="/{{id}}">{{created}} - {{description}}
+      <input type="checkbox" name="done" disabled="disabled" value="{{done}}" {{#if done}}checked{{/if}}>
+      </a>
+    </li>
   {{/each}}
 </ul>
