@@ -1,6 +1,7 @@
 <h2>All Tasks:</h2>
 <a href="/descending">Sort by newest date</a>
 <a href="/ascending">Sort by oldest date</a>
+{{#if todos}}
 <ul>
   {{#each todos}}
     <li>
@@ -10,6 +11,9 @@
     </li>
   {{/each}}
 </ul>
+{{else}}
+<h3>Seems like you have nothing to do</h3>
+{{/if}}
 
 <div class="create">
 <h3>Create new task:</h3>

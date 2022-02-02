@@ -1,6 +1,7 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const todos = require("./data/TodoTasks.js");
+const getDate = require("./lib/getDate.js");
 const morgan = require("morgan");
 
 const app = express();
@@ -29,21 +30,6 @@ function getNewId(list) {
     }
   }
   return maxId + 1;
-}
-
-function getDate() {
-  const todaysDate = new Date();
-  const newDate =
-    todaysDate.getFullYear() +
-    "-" +
-    parseInt(todaysDate.getMonth() + 1) +
-    "-" +
-    todaysDate.getDate() +
-    " " +
-    todaysDate.getHours() +
-    ":" +
-    todaysDate.getMinutes();
-  return newDate;
 }
 
 app.get("/", (req, res) => {

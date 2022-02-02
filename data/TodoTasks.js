@@ -1,20 +1,22 @@
+const getDate = require("../lib/getDate.js");
+
 const todos = [
   {
     id: 1,
-    created: "2022-2-1 13:23",
+    created: getDate(),
     description: "Klappa katten",
     done: true,
   },
   {
     id: 2,
-    created: "2022-2-1 18:56",
+    created: getDate(),
     description: "Göra läxan",
     done: false,
   },
   {
     id: 3,
-    created: "2022-2-1 20:39",
-    description: "Dricka kaffe",
+    created: getDate(),
+    description: "PS. Click me to check, edit or delete me",
     done: false,
   },
 ];
