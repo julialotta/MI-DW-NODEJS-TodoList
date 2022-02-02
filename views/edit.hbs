@@ -1,6 +1,6 @@
 <h2>Edit task</h2>
 
-<form action="/{{id}}/edit" method="post">
+<form action="/task/{{id}}/edit" method="post">
 <input
     type="datetime-local"
     name="created"
@@ -13,6 +13,6 @@
     placeholder="description"
     value="{{description}}"
   />
-  <input type="checkbox" name="done" value="{{done}}" {{#if done}}checked{{/if}}>
+  <input type="checkbox" name="done" value="{{done}}" class="checkbox" {{#if done}}checked{{/if}}>
   <input type="submit" value="Edit Task" />
 </form>

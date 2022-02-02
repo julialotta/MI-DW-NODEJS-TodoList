@@ -51,12 +51,26 @@ app.get("/", (req, res) => {
   res.render("home", { todos });
 });
 
+app.get("/task/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const task = todos.find((i) => i.id === id);
+  res.render("single-task", task);
+});
+
 app.get("/uncompletedtasks", (req, res) => {
   res.render("uncompleted-tasks", { todos });
 });
 
 app.get("/completedtasks", (req, res) => {
   res.render("completed-tasks", { todos });
+});
+
+app.get("/descending", (req, res) => {
+  res.render("descending-dates");
+});
+
+app.get("/ascending", (req, res) => {
+  res.render("ascending-dates");
 });
 
 app.post("/newtask", (req, res) => {
@@ -72,19 +86,13 @@ app.post("/newtask", (req, res) => {
   res.redirect("/");
 });
 
-app.get("/:id", (req, res) => {
-  const id = parseInt(req.params.id);
-  const task = todos.find((i) => i.id === id);
-  res.render("single-task", task);
-});
-
-app.get("/:id/edit", (req, res) => {
+app.get("/task/:id/edit", (req, res) => {
   const id = parseInt(req.params.id);
   const index = todos.find((i) => i.id === id);
   res.render("edit", index);
 });
 
-app.post("/:id/edit", (req, res) => {
+app.post("/task/:id/edit", (req, res) => {
   const id = parseInt(req.params.id);
   const index = todos.findIndex((i) => i.id === id);
   todos[index].created = req.body.created;
@@ -94,16 +102,16 @@ app.post("/:id/edit", (req, res) => {
   } else {
     todos[index].done = false;
   }
-  res.redirect("/" + id);
+  res.redirect("/task/" + id);
 });
 
-app.get("/:id/delete", (req, res) => {
+app.get("/task/:id/delete", (req, res) => {
   const id = parseInt(req.params.id);
   const index = todos.find((i) => i.id === id);
   res.render("delete", index);
 });
 
-app.post("/:id/delete", (req, res) => {
+app.post("/task/:id/delete", (req, res) => {
   const id = parseInt(req.params.id);
   const index = todos.findIndex((i) => i.id === id);
   todos.splice(index, 1);

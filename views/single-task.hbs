@@ -1,7 +1,7 @@
 <h2>Your Task:</h2>
 <p>
   {{description}}
-  <input type="checkbox" name="done" id="done" disabled="disabled" value="{{done}}" {{#if done}}checked{{/if}}>
+  <input type="checkbox" name="done" id="done" disabled="disabled" value="{{done}}" class="checkbox"{{#if done}}checked{{/if}}>
 </p>
-<a href="/{{id}}/edit">Edit Task</a>
-<a href="/{{id}}/delete">Delete Task</a>
+<a href="/task/{{id}}/edit">Edit Task</a>
+<a href="/task/{{id}}/delete">Delete Task</a>

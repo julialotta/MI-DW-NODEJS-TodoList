@@ -5,7 +5,7 @@
     {{#if done}}{{else}}
       <li>
         <a href="/{{id}}">{{created}} - {{description}}
-        <input type="checkbox" name="done" disabled="disabled" value="{{done}}" {{#if done}}checked{{/if}}>
+        <input type="checkbox" name="done" disabled="disabled" value="{{done}}" class="checkbox"{{#if done}}checked{{/if}}>
         </a>
       </li>
     {{/if}}
