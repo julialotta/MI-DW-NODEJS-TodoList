@@ -4,7 +4,7 @@
   {{#each todos}}
     {{#if done}}{{else}}
       <li>
-        <a href="/{{id}}">{{created}} - {{description}}
+        <a href="/task/{{id}}">{{created}} - {{description}}
         <input type="checkbox" name="done" disabled="disabled" value="{{done}}" class="checkbox"{{#if done}}checked{{/if}}>
         </a>
       </li>

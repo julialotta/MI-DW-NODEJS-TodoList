@@ -2,6 +2,7 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const todos = require("./data/TodoTasks.js");
 const getDate = require("./lib/getDate.js");
+const getNewId = require("./lib/getNewId.js");
 const morgan = require("morgan");
 
 const app = express();
@@ -21,16 +22,6 @@ app.use(express.static("public"));
 
 /* vad betyder extended? */
 app.use(express.urlencoded({ extended: false }));
-
-function getNewId(list) {
-  let maxId = 0;
-  for (const item of list) {
-    if (item.id > maxId) {
-      maxId = item.id;
-    }
-  }
-  return maxId + 1;
-}
 
 app.get("/", (req, res) => {
   console.log(todos);
@@ -52,11 +43,17 @@ app.get("/completedtasks", (req, res) => {
 });
 
 app.get("/descending", (req, res) => {
-  res.render("descending-dates");
+  todos.sort((a, b) => {
+    return a.created - b.created;
+  });
+  res.render("home", { todos });
 });
 
 app.get("/ascending", (req, res) => {
-  res.render("ascending-dates");
+  todos.sort((a, b) => {
+    return b.created - a.created;
+  });
+  res.render("home", { todos });
 });
 
 app.post("/newtask", (req, res) => {
