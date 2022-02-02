@@ -81,7 +81,7 @@ app.get("/task/:id/edit", (req, res) => {
 app.post("/task/:id/edit", (req, res) => {
   const id = parseInt(req.params.id);
   const index = todos.findIndex((i) => i.id === id);
-  todos[index].created = req.body.created;
+  todos[index].created = req.body.created.replace("T", " ");
   todos[index].description = req.body.description;
   if (req.body.done) {
     todos[index].done = true;
