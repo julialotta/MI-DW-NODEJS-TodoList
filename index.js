@@ -16,8 +16,8 @@ app.engine(
 app.set("view engine", "hbs");
 app.use(express.static("public"));
 
-/* ? */
-app.use(express.urlencoded({ extended: true }));
+/* vad betyder extended? */
+app.use(express.urlencoded(/* { extended: false } */));
 
 function getNewId(list) {
   let maxId = 0;
@@ -27,6 +27,21 @@ function getNewId(list) {
     }
   }
   return maxId + 1;
+}
+
+function getDate() {
+  const todaysDate = new Date();
+  const newDate =
+    todaysDate.getFullYear() +
+    "-" +
+    parseInt(todaysDate.getMonth() + 1) +
+    "-" +
+    todaysDate.getDate() +
+    " " +
+    todaysDate.getHours() +
+    ":" +
+    todaysDate.getMinutes();
+  return newDate;
 }
 
 app.get("/", (req, res) => {
@@ -41,25 +56,12 @@ app.get("/completedtasks", (req, res) => {
   res.render("completed-tasks", { todos });
 });
 
-app.get("/:id", (req, res) => {
-  res.render("single-task", { todos });
-});
-
 app.post("/newtask", (req, res) => {
   const id = getNewId(todos);
-  const todaysDate = new Date();
+  const date = getDate();
   const newTodo = {
     id: id,
-    created:
-      todaysDate.getFullYear() +
-      "-" +
-      parseInt(todaysDate.getMonth() + 1) +
-      "-" +
-      todaysDate.getDate() +
-      " " +
-      todaysDate.getHours() +
-      ":" +
-      todaysDate.getMinutes(),
+    created: date,
     description: req.body.description,
     done: false,
   };
@@ -71,6 +73,19 @@ app.get("/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const task = todos.find((i) => i.id === id);
   res.render("single-task", task);
+});
+
+app.get("/:id/edit", (req, res) => {
+  const id = parseInt(req.params.id);
+  const index = todos.find((i) => i.id === id);
+  res.render("edit", index);
+});
+
+app.post("/:id/edit", (req, res) => {
+  const id = parseInt(req.params.id);
+  const index = todos.findIndex((i) => i.id === id);
+  todos[index].description = req.body.description;
+  res.redirect("/" + id);
 });
 
 app.listen(8000, () => {
