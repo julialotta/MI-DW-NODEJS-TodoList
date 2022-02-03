@@ -4,13 +4,13 @@ const todos = [
   {
     id: 1,
     created: getDate(),
-    description: "Klappa katten",
+    description: "Something important",
     done: true,
   },
   {
     id: 2,
     created: getDate(),
-    description: "Göra läxan",
+    description: "Something productive",
     done: false,
   },
   {

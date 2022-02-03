@@ -1,8 +1,13 @@
 <h2>Your Task:</h2>
-<p>
-  {{description}}
-  <input type="checkbox" name="done" id="done" disabled="disabled" value="{{done}}" class="checkbox"{{#if done}}checked{{/if}}>
-</p>
-<a href="/task/{{id}}/edit">Edit Task</a>
-<a href="/task/{{id}}/delete">Delete Task</a>
-<a href="/">Go back to All Tasks</a>
+<ul>
+  <li class="single-task">
+    {{description}}
+
+  </li>
+</ul>
+
+<div class="single-menu">
+  <a href="/task/{{id}}/edit">Edit Task</a>
+  <a href="/task/{{id}}/delete">Delete Task</a>
+  <a href="/">Back to All Tasks</a>
+</div>

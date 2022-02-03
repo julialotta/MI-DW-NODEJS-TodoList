@@ -24,7 +24,6 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => {
-  console.log(todos);
   res.render("home", { todos });
 });
 

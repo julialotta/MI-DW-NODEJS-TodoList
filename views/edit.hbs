@@ -1,19 +1,25 @@
 <h2>Edit task</h2>
 
-<form action="/task/{{id}}/edit" method="post">
-<input
-    type="datetime-local"
-    name="created"
-    placeholder="created"
-    value="{{created}}"
-    required
-  />
+
+<form action="/task/{{id}}/edit" method="post" class="edit">
+<label for="description">Task Description:</label>
   <input
     type="text"
     name="description"
     placeholder="description"
     value="{{description}}"
-  />
-  <input type="checkbox" name="done" value="{{done}}" class="checkbox" {{#if done}}checked{{/if}}>
-  <input type="submit" value="Edit Task" />
-</form>
+    id="description"
+  >
+  <label for="created">Creation Date:</label>
+<input
+    type="datetime-local"
+    name="created"
+    placeholder="created"
+    value="{{created}}"
+    id="created"
+    required
+  >
+  <label for="done">Change Status:</label>
+  <input type="checkbox" name="done" value="{{done}}" class="checkbox" id="done" {{#if done}}checked{{/if}}>
+  <input type="submit" value="Edit Task" id="submit" >
+  </form>
