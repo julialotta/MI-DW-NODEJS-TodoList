@@ -5,18 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/style.css" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2??family=Cormorant:wght@300&family=DM+Serif+Display&family=Josefin+Sans:wght@300;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2??family=Cormorant:wght@300&family=DM+Serif+Display&family=Josefin+Sans:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
     <title>Todo App</title>
   </head>
-  <body>
-    {{> header}}
-    <div class="main noise">
-        <div class="noisy">
-          {{{body}}}
+  <body class="container noisy">
+      <div class="shape-blob"></div>
+      <div class="shape-blob one"></div>
+      <div class="shape-blob two"></div>
+      <div class="shape-blob three"></div>
+      <div class="shape-blob four"></div>
+
+    <div class="border">
+      {{> header}}
+        <div class="main">
+          {{{body}}}  
         </div>
+      {{> footer}}
     </div>
-    {{> footer}}
   </body>
 </html>

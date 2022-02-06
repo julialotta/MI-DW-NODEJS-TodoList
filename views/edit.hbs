@@ -1,6 +1,4 @@
 <h2>Edit task</h2>
-
-
 <form action="/task/{{id}}/edit" method="post" class="edit">
 <label for="description">Task Description:</label>
   <input
@@ -11,15 +9,23 @@
     id="description"
   >
   <label for="created">Creation Date:</label>
-<input
+  <input
     type="datetime-local"
     name="created"
     placeholder="created"
     value="{{created}}"
     id="created"
     required
-  >
+    >
   <label for="done">Change Status:</label>
-  <input type="checkbox" name="done" value="{{done}}" class="checkbox" id="done" {{#if done}}checked{{/if}}>
-  <input type="submit" value="Edit Task" id="submit" >
+  <input 
+    type="checkbox" 
+    name="done" 
+    value="{{done}}" 
+    class="checkbox" 
+    id="done" {{#if done}}checked{{/if}}>
+  <input 
+    type="submit" 
+    value="Edit Task" 
+    id="submit" >
   </form>
