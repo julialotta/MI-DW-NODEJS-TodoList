@@ -1,0 +1,22 @@
+<h2>All Tasks:</h2>
+<a href="/descending">Sort by newest date</a>
+<a href="/ascending">Sort by oldest date</a>
+{{#if todos}}
+<ul>
+  {{#each todos}}
+    <li>
+      <a href="/task/{{id}}">{{created}} - {{description}}
+      <input type="checkbox" name="done" disabled="disabled" value="{{done}}" class="checkbox" {{#if done}}checked{{/if}}>
+      </a>
+    </li>
+  {{/each}}
+</ul>
+{{else}}
+<h3>Seems like you have nothing to do</h3>
+{{/if}}
+<div class="create">
+<h3>Create new task:</h3>
+<form action="/newtask" method="post">
+  <input type="text" name="description" placeholder="description" />
+</form>
+</div>

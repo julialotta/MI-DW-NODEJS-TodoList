@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/julialotta/MI-DW-NODEJS-TodoList/issues"
   },
-  "homepage": "https://github.com/julialotta/MI-DW-NODEJS-TodoList#readme"
+  "homepage": "https://github.com/julialotta/MI-DW-NODEJS-TodoList#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "express-handlebars": "^6.0.2",
+    "morgan": "^1.10.0"
+  }
 }
