@@ -7,7 +7,7 @@ const morgan = require("morgan");
 
 const app = express();
 app.use(express.json());
-/* app.use(morgan("common")); */
+app.use(morgan("common"));
 
 app.engine(
   "hbs",
@@ -20,7 +20,6 @@ app.engine(
 app.set("view engine", "hbs");
 app.use(express.static("public"));
 
-/* vad betyder extended? */
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => {
