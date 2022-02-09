@@ -3,7 +3,6 @@ const router = express.Router();
 const getDb = require("../database.js");
 const getDate = require("../lib/getDate.js");
 const { ObjectId } = require("mongodb");
-const req = require("express/lib/request");
 
 const COLLECTION_NAME = "todos";
 
@@ -50,16 +49,31 @@ router.get("/completedtasks", async (req, res) => {
   });
   res.render("completed-tasks", { completedTasks });
 });
-/* 
-router.get("/descending", (req, res) => {
+router.get("/descending", async (req, res) => {
+  const db = await getDb();
+  const dbTodos = db.collection(COLLECTION_NAME).find();
+
+  const todos = [];
+
+  await dbTodos.forEach((task) => {
+    todos.push(task);
+  });
   todos.sort((a, b) => (a.created > b.created ? 1 : -1));
   res.render("home", { todos });
 });
 
-router.get("/ascending", (req, res) => {
+router.get("/ascending", async (req, res) => {
+  const db = await getDb();
+  const dbTodos = db.collection(COLLECTION_NAME).find();
+
+  const todos = [];
+
+  await dbTodos.forEach((task) => {
+    todos.push(task);
+  });
   todos.sort((a, b) => (a.created > b.created ? -1 : 1));
   res.render("home", { todos });
-}); */
+});
 
 router.post("/newtask", async (req, res) => {
   const date = getDate();
