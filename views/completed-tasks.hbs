@@ -1,9 +1,9 @@
 <h2>Completed Tasks:</h2>
 <ul>
-  {{#each todos}}
+  {{#each completedTasks}}
     {{#if done}}
       <li>
-        <a href="/task/{{id}}">{{created}} - {{description}}
+        <a href="/task/{{_id}}">{{created}} - {{description}}
         <input type="checkbox" name="done" disabled="disabled" value="{{done}}" class="checkbox" {{#if done}}checked{{/if}}>
         </a>
       </li>
