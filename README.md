@@ -17,10 +17,10 @@ För G
 
 ✓Alla Todotasks har följande attribut:
 
-	o Id
-	o Created (datum & tid)
-	o Description
-	o Done (true/false)
+	Id
+	Created (datum & tid)
+	Description
+	Done (true/false)
 ✓Användare ska kunna genomföra alla CRUD-operationer på Todo tasks.
 
 För VG
