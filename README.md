@@ -1,4 +1,5 @@
 # MI-DW-NODEJS-TodoList
+Individual assignment at Medieinstitutet to create a Task Management App with Express & Handlebars.
 
 ## Assignment in the course Dynamic Web Development
 
