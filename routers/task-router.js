@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const getDb = require("../database.js");
 const getDate = require("../lib/getDate.js");
-/* const { ObjectId } = require("mongodb"); */
+const { ObjectId } = require("mongodb");
 
 const COLLECTION_NAME = "todos";
 
@@ -18,13 +18,15 @@ router.get("/", async (req, res) => {
   res.render("home", { todos });
 });
 
-/* 
 router.get("/:id", async (req, res) => {
-  const id = parseInt(req.params.id);
-  const task = todos.find((i) => i.id === id);
-  res.render("single-task", task);
+  const id = ObjectId(req.params.id);
+  const db = await getDb();
+  db.collection(COLLECTION_NAME).findOne({ _id: id }, (err, task) => {
+    res.render("single-task", { task });
+  });
 });
 
+/* 
 router.get("/uncompletedtasks", (req, res) => {
   res.render("uncompleted-tasks", { todos });
 });
@@ -53,7 +55,7 @@ router.post("/newtask", async (req, res) => {
     };
     const db = await getDb();
     await db.collection(COLLECTION_NAME).insertOne(newTodo);
-    res.sendStatus(201);
+    res.redirect("/");
   } else {
     res.sendStatus(400);
   }

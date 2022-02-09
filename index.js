@@ -22,10 +22,6 @@ app.engine(
 app.set("view engine", "hbs");
 app.use(express.static("public"));
 
-/* app.get("/", (req, res) => {
-  res.render("home", { todos });
-}); */
-
 app.use("/", taskRouter);
 
 app.listen(8000, () => {
