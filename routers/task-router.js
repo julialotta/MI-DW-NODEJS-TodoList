@@ -2,19 +2,13 @@ const express = require("express");
 const router = express.Router();
 const getDb = require("../database.js");
 const getDate = require("../lib/getDate.js");
+const getList = require("../lib/getTodolist.js");
 const { ObjectId } = require("mongodb");
 
 const COLLECTION_NAME = "todos";
 
 router.get("/", async (req, res) => {
-  const db = await getDb();
-  const dbTodos = db.collection(COLLECTION_NAME).find();
-
-  const todos = [];
-
-  await dbTodos.forEach((task) => {
-    todos.push(task);
-  });
+  const todos = await getList();
   res.render("home", { todos });
 });
 
@@ -27,50 +21,22 @@ router.get("/task/:id", async (req, res) => {
 });
 
 router.get("/uncompletedtasks", async (req, res) => {
-  const db = await getDb();
-  const dbTodos = db.collection(COLLECTION_NAME).find();
-
-  const uncompletedTasks = [];
-
-  await dbTodos.forEach((task) => {
-    uncompletedTasks.push(task);
-  });
-  res.render("uncompleted-tasks", { uncompletedTasks });
+  const todos = await getList();
+  res.render("uncompleted-tasks", { todos });
 });
 
 router.get("/completedtasks", async (req, res) => {
-  const db = await getDb();
-  const dbTodos = db.collection(COLLECTION_NAME).find();
-
-  const completedTasks = [];
-
-  await dbTodos.forEach((task) => {
-    completedTasks.push(task);
-  });
-  res.render("completed-tasks", { completedTasks });
+  const todos = await getList();
+  res.render("completed-tasks", { todos });
 });
 router.get("/descending", async (req, res) => {
-  const db = await getDb();
-  const dbTodos = db.collection(COLLECTION_NAME).find();
-
-  const todos = [];
-
-  await dbTodos.forEach((task) => {
-    todos.push(task);
-  });
+  const todos = await getList();
   todos.sort((a, b) => (a.created > b.created ? 1 : -1));
   res.render("home", { todos });
 });
 
 router.get("/ascending", async (req, res) => {
-  const db = await getDb();
-  const dbTodos = db.collection(COLLECTION_NAME).find();
-
-  const todos = [];
-
-  await dbTodos.forEach((task) => {
-    todos.push(task);
-  });
+  const todos = await getList();
   todos.sort((a, b) => (a.created > b.created ? -1 : 1));
   res.render("home", { todos });
 });
@@ -116,7 +82,6 @@ router.post("/:id/edit", async (req, res) => {
 
 router.get("/:id/delete", async (req, res) => {
   const id = ObjectId(req.params.id);
-
   const db = await getDb();
   db.collection(COLLECTION_NAME).findOne({ _id: id }, (err, task) => {
     res.render("delete", task);
@@ -125,7 +90,6 @@ router.get("/:id/delete", async (req, res) => {
 
 router.post("/:id/delete", async (req, res) => {
   const id = ObjectId(req.params.id);
-
   const db = await getDb();
   db.collection(COLLECTION_NAME).deleteOne({ _id: id }, (err, task) => {
     res.redirect("/");

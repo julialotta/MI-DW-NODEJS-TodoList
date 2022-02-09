@@ -1,6 +1,6 @@
 <h2>Uncompleted Tasks:</h2>
 <ul>
-  {{#each uncompletedTasks}}
+  {{#each todos}}
     {{#if done}}{{else}}
       <li>
         <a href="/task/{{_id}}">{{created}} - {{description}}
