@@ -1,31 +1,16 @@
 # MI-DW-NODEJS-TodoList
 
-Inlämningsuppgift 1(node js)
-Mål
-Målet med uppgiften är att utvärdera dina kunskaper i följande moment:
+## Assignment in the course Dynamic Web Development
 
-✓Nodejs
-✓Formulärhantering
-✓Express ramverk
-✓Routing
-✓Template engine
+### Assignment: 
+- Create a TODO application with Express and Handlebars.
+- All Todo tasks should have the following attributes:
+	-  Id
+	-  Created (date & time)
+	-   Description
+	-   Done
+- User should be able to perform all the CRUD operations (Create, Read, Update & Delete) on the tasks.
 
-Beskrivning
-För G
+- User can chose to show all tasks, only done tasks (done=true) or not done tasks (done=false).
+- User can sort tasks after creation date, both newest → oldest and oldest → newest.
 
-✓Du skall skapa en TODO-applikation med Express och Handlebars
-
-✓Alla Todotasks har följande attribut:
-
-	Id
-	Created (datum & tid)
-	Description
-	Done (true/false)
-✓Användare ska kunna genomföra alla CRUD-operationer på Todo tasks.
-
-För VG
-
-✓Användare kan välja att visa alla tasks, endast klara (done = true) eller endast ej klara (done = false).
-
-✓Användare kan sortera tasks efter när de skapades
-(Created), både nyast → äldst och äldst → nyast.
