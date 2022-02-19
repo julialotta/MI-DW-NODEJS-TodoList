@@ -1,4 +1,6 @@
-const { urlencoded } = require("express");
+require("dotenv").config();
+
+/* const { urlencoded } = require("express"); behövs?? */
 const express = require("express");
 const exphbs = require("express-handlebars");
 const taskRouter = require("./routers/task-router");
@@ -6,7 +8,8 @@ const taskRouter = require("./routers/task-router");
  */
 const app = express();
 app.use(express.json());
-app.use(urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
 
 /* app.use(morgan("common"));
  */
@@ -20,7 +23,6 @@ app.engine(
 );
 
 app.set("view engine", "hbs");
-app.use(express.static("public"));
 
 app.use("/", taskRouter);
 
