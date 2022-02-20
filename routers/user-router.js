@@ -38,7 +38,10 @@ router.get("/:id", async (req, res) => {
       const todos = await db.getTodoCollection();
       let assignedtodos = [];
       for (let i = 0; i < todos.length; i++) {
-        if (parseInt(todos[i].user._id) === parseInt(user._id)) {
+        if (
+          todos[i].user &&
+          parseInt(todos[i].user._id) === parseInt(user._id)
+        ) {
           assignedtodos.push(todos[i]);
         }
       }
@@ -73,7 +76,7 @@ router.post("/:id/edit", async (req, res) => {
   }
 });
 
-//GET single task delete
+//GET single user delete
 router.get("/:id/delete", async (req, res) => {
   const id = ObjectId(req.params.id);
   const database = await db.getDb();
@@ -82,13 +85,29 @@ router.get("/:id/delete", async (req, res) => {
   });
 });
 
-// POST single task delete
+// POST single user delete
 router.post("/:id/delete", async (req, res) => {
   const id = ObjectId(req.params.id);
   const database = await db.getDb();
-  database.collection(USER_COLLECTION).deleteOne({ _id: id }, (err, user) => {
-    res.redirect("/user/users");
-  });
+  const todos = await db.getTodoCollection();
+  database
+    .collection(USER_COLLECTION)
+    .deleteOne({ _id: id }, async (err, user) => {
+      for (let i = 0; i < todos.length; i++) {
+        if (parseInt(todos[i].user._id) === parseInt(user._id)) {
+          let taskId = todos[i].user._id;
+          const updateTask = {
+            assigned: false,
+            user: {},
+          };
+          const database = await db.getDb();
+          database
+            .collection(USER_COLLECTION)
+            .updateOne({ _id: taskId }, { $set: updateTask });
+        }
+      }
+      res.redirect("/user/users");
+    });
 });
 
 module.exports = router;

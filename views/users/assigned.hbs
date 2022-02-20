@@ -1,9 +1,9 @@
 <h2>Assigned:</h2>
 <ul>
   {{#each todos}}
-    {{#if doer.assigned}}
+    {{#if assigned}}
       <li>
-        <a href="/user/{{doer.doer._id}}">{{doer.doer.user}} </a>
+        <a href="/user/{{user._id}}">{{user.user}} </a>
         <a href="/task/{{_id}}"> : {{description}}
         <input type="checkbox" name="done" disabled="disabled" value="{{done}}" class="checkbox" {{#if done}}checked{{/if}}>
         </a>

@@ -1,7 +1,7 @@
 <h2>Unassigned Tasks:</h2>
 <ul>
   {{#each todos}}
-    {{#if doer.assigned}}{{else}}
+    {{#if assigned}}{{else}}
       <li>
         <a href="/task/{{_id}}">{{description}}
         <input type="checkbox" name="done" disabled="disabled" value="{{done}}" class="checkbox"{{#if done}}checked{{/if}}>
