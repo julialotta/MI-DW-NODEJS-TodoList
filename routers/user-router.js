@@ -6,15 +6,33 @@ const router = express.Router();
 
 const USER_COLLECTION = "users";
 
-//GET /users
+//GET /assigned tasks
 router.get("/assigned", async (req, res) => {
   const users = await db.getUserCollection();
   res.render("users/assigned", { users });
 });
 
+//GET /unassigned tasks
 router.get("/unassigned", async (req, res) => {
   const users = await db.getUserCollection();
   res.render("users/unassigned", { users });
+});
+
+// POST new user
+router.post("/new", async (req, res) => {
+  const taskId = ObjectId(req.body.task);
+  const user = req.body.user;
+
+  const database = await db.getDb();
+
+  database.collection("todos").findOne({ _id: taskId }, async (err, task) => {
+    const assignedTask = {
+      user,
+      task,
+    };
+    await database.collection(USER_COLLECTION).insertOne(assignedTask);
+    res.redirect("/");
+  });
 });
 
 // GET uncompleted tasks
@@ -41,23 +59,6 @@ router.get("/ascending", async (req, res) => {
   const todos = await db.getTodoCollection();
   todos.sort((a, b) => (a.created > b.created ? -1 : 1));
   res.render("home", { todos });
-});
-
-// POST new task
-router.post("/newtask", async (req, res) => {
-  const newTodo = {
-    created: utils.getDate(),
-    description: req.body.description,
-    done: false,
-  };
-
-  if (utils.validateNewTodo) {
-    const database = await db.getDb();
-    await database.collection(TODOS_COLLECTION).insertOne(newTodo);
-    res.redirect("/");
-  } else {
-    res.sendStatus(400);
-  }
 });
 
 // GET single task

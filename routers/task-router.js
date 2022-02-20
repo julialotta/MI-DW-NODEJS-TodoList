@@ -9,7 +9,8 @@ const TODOS_COLLECTION = "todos";
 //GET Homepage
 router.get("/", async (req, res) => {
   const todos = await db.getTodoCollection();
-  res.render("home", { todos });
+  const users = await db.getUserCollection();
+  res.render("home", { todos, users });
 });
 
 // GET uncompleted tasks
