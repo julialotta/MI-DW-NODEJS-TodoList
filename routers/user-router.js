@@ -5,6 +5,7 @@ const db = require("../database");
 const router = express.Router();
 
 const USER_COLLECTION = "users";
+const TODOS_COLLECTION = "todos";
 
 //GET /all users
 router.get("/users", async (req, res) => {
@@ -31,10 +32,18 @@ router.post("/newuser", async (req, res) => {
 router.get("/:id", async (req, res) => {
   const id = ObjectId(req.params.id);
   const database = await db.getDb();
-  database.collection(USER_COLLECTION).findOne({ _id: id }, (err, user) => {
-    res.render("users/single-user", user);
-    /*  skapa en array och skicka: assignedtodos */
-  });
+  database
+    .collection(USER_COLLECTION)
+    .findOne({ _id: id }, async (err, user) => {
+      const todos = await db.getTodoCollection();
+      let assignedtodos = [];
+      for (let i = 0; i < todos.length; i++) {
+        if (parseInt(todos[i].user._id) === parseInt(user._id)) {
+          assignedtodos.push(todos[i]);
+        }
+      }
+      res.render("users/single-user", { user, assignedtodos });
+    });
 });
 
 // GET single task edit

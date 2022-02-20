@@ -9,8 +9,7 @@ const TODOS_COLLECTION = "todos";
 //GET Homepage
 router.get("/", async (req, res) => {
   const todos = await db.getTodoCollection();
-  const users = await db.getUserCollection();
-  res.render("home", { todos, users });
+  res.render("home", { todos });
 });
 
 // GET uncompleted tasks
@@ -57,9 +56,7 @@ router.post("/newtask", async (req, res) => {
     created: utils.getDate(),
     description: req.body.description,
     done: false,
-    doer: {
-      assigned: false,
-    },
+    assigned: false,
   };
 
   if (utils.validateNewTodo(newTodo)) {
@@ -150,10 +147,8 @@ router.post("/:id/assign", async (req, res) => {
     .collection("users")
     .findOne({ _id: userId }, async (err, user) => {
       const newTask = {
-        doer: {
-          assigned: true,
-          doer: user,
-        },
+        assigned: true,
+        user,
       };
       if (utils.validateAssignment(newTask)) {
         const database = await db.getDb();
