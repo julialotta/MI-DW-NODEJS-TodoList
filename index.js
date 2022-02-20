@@ -4,6 +4,7 @@ require("dotenv").config();
 const express = require("express");
 const exphbs = require("express-handlebars");
 const taskRouter = require("./routers/task-router");
+const userRouter = require("./routers/user-router");
 /* const morgan = require("morgan");
  */
 const app = express();
@@ -25,6 +26,7 @@ app.engine(
 app.set("view engine", "hbs");
 
 app.use("/", taskRouter);
+app.use("/user", userRouter);
 
 app.listen(8000, () => {
   console.log("http://localhost:8000");

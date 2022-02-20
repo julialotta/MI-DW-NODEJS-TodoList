@@ -15,4 +15,10 @@ async function getTodoCollection() {
   return todos;
 }
 
-module.exports = { getTodoCollection, getDb };
+async function getUserCollection() {
+  const db = await getDb();
+  const users = db.collection("users").find().toArray();
+  return users;
+}
+
+module.exports = { getTodoCollection, getUserCollection, getDb };

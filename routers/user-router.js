@@ -4,24 +4,29 @@ const utils = require("../utils.js");
 const db = require("../database");
 const router = express.Router();
 
-const TODOS_COLLECTION = "todos";
+const USER_COLLECTION = "users";
 
-//GET Homepage
-router.get("/", async (req, res) => {
-  const todos = await db.getTodoCollection();
-  res.render("home", { todos });
+//GET /users
+router.get("/assigned", async (req, res) => {
+  const users = await db.getUserCollection();
+  res.render("users/assigned", { users });
+});
+
+router.get("/unassigned", async (req, res) => {
+  const users = await db.getUserCollection();
+  res.render("users/unassigned", { users });
 });
 
 // GET uncompleted tasks
 router.get("/uncompletedtasks", async (req, res) => {
   const todos = await db.getTodoCollection();
-  res.render("tasks/uncompleted-tasks", { todos });
+  res.render("uncompleted-tasks", { todos });
 });
 
 // GET completed tasks
 router.get("/completedtasks", async (req, res) => {
   const todos = await db.getTodoCollection();
-  res.render("tasks/completed-tasks", { todos });
+  res.render("completed-tasks", { todos });
 });
 
 // GET tasks sorted by descending
@@ -60,7 +65,7 @@ router.get("/task/:id", async (req, res) => {
   const id = ObjectId(req.params.id);
   const database = await db.getDb();
   database.collection(TODOS_COLLECTION).findOne({ _id: id }, (err, task) => {
-    res.render("tasks/single-task", task);
+    res.render("single-task", task);
   });
 });
 
@@ -69,7 +74,7 @@ router.get("/:id/edit", async (req, res) => {
   const id = ObjectId(req.params.id);
   const database = await db.getDb();
   database.collection(TODOS_COLLECTION).findOne({ _id: id }, (err, task) => {
-    res.render("tasks/edit", task);
+    res.render("edit", task);
   });
 });
 
@@ -104,7 +109,7 @@ router.get("/:id/delete", async (req, res) => {
   const id = ObjectId(req.params.id);
   const database = await db.getDb();
   database.collection(TODOS_COLLECTION).findOne({ _id: id }, (err, task) => {
-    res.render("tasks/delete", task);
+    res.render("delete", task);
   });
 });
 
