@@ -25,6 +25,18 @@ router.get("/completedtasks", async (req, res) => {
   res.render("tasks/completed-tasks", { todos });
 });
 
+//GET /assigned tasks
+router.get("/assigned", async (req, res) => {
+  const todos = await db.getTodoCollection();
+  res.render("users/assigned", { todos });
+});
+
+//GET /unassigned tasks
+router.get("/unassigned", async (req, res) => {
+  const todos = await db.getTodoCollection();
+  res.render("users/unassigned", { todos });
+});
+
 // GET tasks sorted by descending
 router.get("/descending", async (req, res) => {
   const todos = await db.getTodoCollection();
@@ -45,9 +57,12 @@ router.post("/newtask", async (req, res) => {
     created: utils.getDate(),
     description: req.body.description,
     done: false,
+    doer: {
+      assigned: false,
+    },
   };
 
-  if (utils.validateNewTodo) {
+  if (utils.validateNewTodo(newTodo)) {
     const database = await db.getDb();
     await database.collection(TODOS_COLLECTION).insertOne(newTodo);
     res.redirect("/");
@@ -60,9 +75,12 @@ router.post("/newtask", async (req, res) => {
 router.get("/task/:id", async (req, res) => {
   const id = ObjectId(req.params.id);
   const database = await db.getDb();
-  database.collection(TODOS_COLLECTION).findOne({ _id: id }, (err, task) => {
-    res.render("tasks/single-task", task);
-  });
+  database
+    .collection(TODOS_COLLECTION)
+    .findOne({ _id: id }, async (err, task) => {
+      const users = await db.getUserCollection();
+      res.render("tasks/single-task", { task, users });
+    });
 });
 
 // GET single task edit
@@ -91,7 +109,7 @@ router.post("/:id/edit", async (req, res) => {
   };
   if (utils.validateUpdatedTodo(newTask)) {
     const database = await db.getDb();
-    database
+    await database
       .collection(TODOS_COLLECTION)
       .updateOne({ _id: id }, { $set: newTask });
     res.redirect("/");
@@ -104,18 +122,49 @@ router.post("/:id/edit", async (req, res) => {
 router.get("/:id/delete", async (req, res) => {
   const id = ObjectId(req.params.id);
   const database = await db.getDb();
-  database.collection(TODOS_COLLECTION).findOne({ _id: id }, (err, task) => {
-    res.render("tasks/delete", task);
-  });
+  await database
+    .collection(TODOS_COLLECTION)
+    .findOne({ _id: id }, (err, task) => {
+      res.render("tasks/delete", task);
+    });
 });
 
 // POST single task delete
 router.post("/:id/delete", async (req, res) => {
   const id = ObjectId(req.params.id);
   const database = await db.getDb();
-  database.collection(TODOS_COLLECTION).deleteOne({ _id: id }, (err, task) => {
-    res.redirect("/");
-  });
+  await database
+    .collection(TODOS_COLLECTION)
+    .deleteOne({ _id: id }, (err, task) => {
+      res.redirect("/");
+    });
+});
+
+// POST assign user to task
+router.post("/:id/assign", async (req, res) => {
+  const userId = ObjectId(req.body.user);
+  const taskId = ObjectId(req.params.id);
+
+  const database = await db.getDb();
+  await database
+    .collection("users")
+    .findOne({ _id: userId }, async (err, user) => {
+      const newTask = {
+        doer: {
+          assigned: true,
+          doer: user,
+        },
+      };
+      if (utils.validateAssignment(newTask)) {
+        const database = await db.getDb();
+        await database
+          .collection(TODOS_COLLECTION)
+          .updateOne({ _id: taskId }, { $set: newTask });
+        res.redirect("/");
+      } else {
+        res.sendStatus(400);
+      }
+    });
 });
 
 module.exports = router;

@@ -17,16 +17,6 @@
 <div class="create">
 <h3>Create new task:</h3>
 <form action="/newtask" method="post">
-  <input type="text" name="description" placeholder="description" />
-</form>
-<h3>Assign tasks:</h3>
-<form action="/user/new" method="post">
-  <input type="text" name="user" placeholder="name" />
-  <select name="task">
-    {{#each todos}}
-      <option value="{{_id}}">{{description}}</option>
-    {{/each}}
-  </select>
-  <input type="submit" value="Assign">
+  <input class="taskinput" type="text" name="description" placeholder="description" />
 </form>
 </div>

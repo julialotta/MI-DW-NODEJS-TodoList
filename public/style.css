@@ -131,7 +131,7 @@ footer {
   border: black solid 1px;
   border-radius: 4px;
   width: 60%;
-  min-height: 90%;
+  height: min-content;
   margin: 20px 0;
   position: relative;
 }
@@ -142,7 +142,7 @@ header > div {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 50px 0;
+  padding: 40px 0 20px 0;
 }
 
 .header > a {
@@ -164,11 +164,18 @@ p,
 
 .menu {
   display: flex;
-  justify-content: space-around;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   margin-top: 20px;
-  margin-bottom: 10px;
-  width: 70%;
+  margin-bottom: 5px;
+  width: 80%;
   font-size: 20px;
+}
+
+.menu > div > a {
+  margin: 6px 40px;
 }
 
 .main > div {
@@ -181,21 +188,23 @@ p,
 
 h2 {
   font-size: 40px;
+  text-align: center;
 }
 
 .create {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 10px;
 }
 
-input {
-  margin: 20px;
+.taskinput {
+  margin-bottom: 30px;
   background-image: url(/assets/noise.png);
   font-family: "Josefin Sans", sans-serif;
   font-size: 16px;
-  padding: 16px;
+  padding: 20px;
+  width: 250px;
   text-align: center;
   background-color: #8fb0a979;
   border: black 2px solid;
@@ -235,25 +244,58 @@ input[type="checkbox"]:checked::before {
   transform: scale(0.9);
 }
 
+.assignform {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  align-items: center;
+}
+
+#selectuser,
+input {
+  background-image: url(/assets/noise.png);
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 13px;
+  padding: 8px;
+  margin: 5px;
+  text-align: center;
+  background-color: #8fb0a979;
+  border: black 2px solid;
+  border-radius: 4px;
+  box-shadow: 4px 4px 5px 0 rgba(100, 100, 111, 0.2);
+}
+#assign {
+  width: max-content;
+  margin-bottom: 60px;
+}
+#assign:hover {
+  background-color: #8fb0a9;
+}
+
 footer {
-  width: 100%;
+  width: 90%;
   font-size: 13px;
   position: absolute;
-  bottom: 20px;
+  bottom: 10px;
+  margin: 0 5px;
+  text-align: center;
 }
 
 ul {
-  margin-top: 30px;
+  margin: 20px 0 60px 0;
 }
 
 li {
   list-style: none;
   font-size: 17px;
   padding: 5px 10px;
+  display: flex;
+  text-justify: newspaper;
 }
 
 a:hover {
   color: #385f5dc4;
+  cursor: pointer;
 }
 
 .noisy {
@@ -265,7 +307,7 @@ a:hover {
   justify-content: space-around;
   flex-direction: column;
   margin-top: 25px;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
 }
 
 .single-menu > a {

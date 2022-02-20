@@ -1,11 +1,22 @@
 <h2>Your Task:</h2>
 <ul>
   <li class="single-task">
-    {{description}}
+    {{task.description}}
   </li>
 </ul>
+<h3>Assign tasks to someone:</h3>
+<form action="/{{task._id}}/assign" method="post" class="assignform">
+  <select name="user" id="selectuser" required>
+    {{#each users}}
+      <option value="" hidden>Select assignee</option>
+      <option value="{{_id}}">{{user}}</option>
+    {{/each}}
+  </select>
+  <input type="submit" value="Assign" id="assign" />
+</form>
+
 <div class="single-menu">
-  <a href="/{{_id}}/edit">Edit Task</a>
-  <a href="/{{_id}}/delete">Delete Task</a>
+  <a href="/{{task._id}}/edit">Edit Task</a>
+  <a href="/{{task._id}}/delete">Delete Task</a>
   <a href="/">Back to All Tasks</a>
 </div>

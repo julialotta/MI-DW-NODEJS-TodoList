@@ -1,9 +1,9 @@
 <h2>Unassigned Tasks:</h2>
 <ul>
   {{#each todos}}
-    {{#if done}}{{else}}
+    {{#if doer.assigned}}{{else}}
       <li>
-        <a href="/task/{{_id}}">{{created}} - {{description}}
+        <a href="/task/{{_id}}">{{description}}
         <input type="checkbox" name="done" disabled="disabled" value="{{done}}" class="checkbox"{{#if done}}checked{{/if}}>
         </a>
       </li>

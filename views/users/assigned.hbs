@@ -1,11 +1,14 @@
-<h2>Assigned Tasks:</h2>
+<h2>Assigned:</h2>
 <ul>
-  {{#each users}}
+  {{#each todos}}
+    {{#if doer.assigned}}
       <li>
-        <a href="/task/{{task._id}}"><strong>{{user}}</strong>: {{task.description}}
+        <a href="/user/{{doer.doer._id}}">{{doer.doer.user}} </a>
+        <a href="/task/{{_id}}"> : {{description}}
         <input type="checkbox" name="done" disabled="disabled" value="{{done}}" class="checkbox" {{#if done}}checked{{/if}}>
         </a>
       </li>
+    {{/if}}
   {{/each}}
 </ul>
 

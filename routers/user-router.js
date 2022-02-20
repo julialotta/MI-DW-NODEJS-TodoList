@@ -6,67 +6,34 @@ const router = express.Router();
 
 const USER_COLLECTION = "users";
 
-//GET /assigned tasks
-router.get("/assigned", async (req, res) => {
+//GET /all users
+router.get("/users", async (req, res) => {
   const users = await db.getUserCollection();
-  res.render("users/assigned", { users });
-});
-
-//GET /unassigned tasks
-router.get("/unassigned", async (req, res) => {
-  const users = await db.getUserCollection();
-  res.render("users/unassigned", { users });
+  res.render("users/users", { users });
 });
 
 // POST new user
-router.post("/new", async (req, res) => {
-  const taskId = ObjectId(req.body.task);
-  const user = req.body.user;
+router.post("/newuser", async (req, res) => {
+  const newUser = {
+    user: req.body.user,
+  };
 
-  const database = await db.getDb();
-
-  database.collection("todos").findOne({ _id: taskId }, async (err, task) => {
-    const assignedTask = {
-      user,
-      task,
-    };
-    await database.collection(USER_COLLECTION).insertOne(assignedTask);
-    res.redirect("/");
-  });
+  if (utils.validateNewUser(newUser)) {
+    const database = await db.getDb();
+    await database.collection(USER_COLLECTION).insertOne(newUser);
+    res.redirect("/user/users");
+  } else {
+    res.sendStatus(400);
+  }
 });
 
-// GET uncompleted tasks
-router.get("/uncompletedtasks", async (req, res) => {
-  const todos = await db.getTodoCollection();
-  res.render("uncompleted-tasks", { todos });
-});
-
-// GET completed tasks
-router.get("/completedtasks", async (req, res) => {
-  const todos = await db.getTodoCollection();
-  res.render("completed-tasks", { todos });
-});
-
-// GET tasks sorted by descending
-router.get("/descending", async (req, res) => {
-  const todos = await db.getTodoCollection();
-  todos.sort((a, b) => (a.created > b.created ? 1 : -1));
-  res.render("home", { todos });
-});
-
-// GET tasks sorted by ascending
-router.get("/ascending", async (req, res) => {
-  const todos = await db.getTodoCollection();
-  todos.sort((a, b) => (a.created > b.created ? -1 : 1));
-  res.render("home", { todos });
-});
-
-// GET single task
-router.get("/task/:id", async (req, res) => {
+// GET single user
+router.get("/:id", async (req, res) => {
   const id = ObjectId(req.params.id);
   const database = await db.getDb();
-  database.collection(TODOS_COLLECTION).findOne({ _id: id }, (err, task) => {
-    res.render("single-task", task);
+  database.collection(USER_COLLECTION).findOne({ _id: id }, (err, user) => {
+    res.render("users/single-user", user);
+    /*  skapa en array och skicka: assignedtodos */
   });
 });
 
@@ -74,31 +41,23 @@ router.get("/task/:id", async (req, res) => {
 router.get("/:id/edit", async (req, res) => {
   const id = ObjectId(req.params.id);
   const database = await db.getDb();
-  database.collection(TODOS_COLLECTION).findOne({ _id: id }, (err, task) => {
-    res.render("edit", task);
+  database.collection(USER_COLLECTION).findOne({ _id: id }, (err, user) => {
+    res.render("users/edit", user);
   });
 });
 
 // POST single task edit
 router.post("/:id/edit", async (req, res) => {
   const id = ObjectId(req.params.id);
-  let doneStatus;
-  if (req.body.done) {
-    doneStatus = true;
-  }
-  if (!req.body.done) {
-    doneStatus = false;
-  }
-  const newTask = {
-    description: req.body.description,
-    created: req.body.created.replace("T", " "),
-    done: doneStatus,
+
+  const updatedUser = {
+    user: req.body.user,
   };
-  if (utils.validateUpdatedTodo(newTask)) {
+  if (utils.validateUpdatedUser(updatedUser)) {
     const database = await db.getDb();
     database
-      .collection(TODOS_COLLECTION)
-      .updateOne({ _id: id }, { $set: newTask });
+      .collection(USER_COLLECTION)
+      .updateOne({ _id: id }, { $set: updatedUser });
     res.redirect("/");
   } else {
     res.sendStatus(400);
@@ -109,8 +68,8 @@ router.post("/:id/edit", async (req, res) => {
 router.get("/:id/delete", async (req, res) => {
   const id = ObjectId(req.params.id);
   const database = await db.getDb();
-  database.collection(TODOS_COLLECTION).findOne({ _id: id }, (err, task) => {
-    res.render("delete", task);
+  database.collection(USER_COLLECTION).findOne({ _id: id }, (err, user) => {
+    res.render("users/delete", user);
   });
 });
 
@@ -118,8 +77,8 @@ router.get("/:id/delete", async (req, res) => {
 router.post("/:id/delete", async (req, res) => {
   const id = ObjectId(req.params.id);
   const database = await db.getDb();
-  database.collection(TODOS_COLLECTION).deleteOne({ _id: id }, (err, task) => {
-    res.redirect("/");
+  database.collection(USER_COLLECTION).deleteOne({ _id: id }, (err, user) => {
+    res.redirect("/user/users");
   });
 });
 
