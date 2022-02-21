@@ -38,10 +38,7 @@ router.get("/:id", async (req, res) => {
       const todos = await db.getTodoCollection();
       let assignedtodos = [];
       for (let i = 0; i < todos.length; i++) {
-        if (
-          todos[i].user &&
-          parseInt(todos[i].user._id) === parseInt(user._id)
-        ) {
+        if (todos[i].assigned == true && user._id.equals(todos[i].user._id)) {
           assignedtodos.push(todos[i]);
         }
       }
@@ -49,7 +46,7 @@ router.get("/:id", async (req, res) => {
     });
 });
 
-// GET single task edit
+// GET single user edit
 router.get("/:id/edit", async (req, res) => {
   const id = ObjectId(req.params.id);
   const database = await db.getDb();
@@ -58,7 +55,7 @@ router.get("/:id/edit", async (req, res) => {
   });
 });
 
-// POST single task edit
+// POST single user edit
 router.post("/:id/edit", async (req, res) => {
   const id = ObjectId(req.params.id);
 
@@ -94,15 +91,16 @@ router.post("/:id/delete", async (req, res) => {
     .collection(USER_COLLECTION)
     .deleteOne({ _id: id }, async (err, user) => {
       for (let i = 0; i < todos.length; i++) {
-        if (parseInt(todos[i].user._id) === parseInt(user._id)) {
-          let taskId = todos[i].user._id;
+        if (todos[i].assigned === true && todos[i].user._id.equals(id)) {
+          console.log("match");
+          const taskId = ObjectId(todos[i]._id);
           const updateTask = {
             assigned: false,
             user: {},
           };
           const database = await db.getDb();
-          database
-            .collection(USER_COLLECTION)
+          await database
+            .collection(TODOS_COLLECTION)
             .updateOne({ _id: taskId }, { $set: updateTask });
         }
       }
