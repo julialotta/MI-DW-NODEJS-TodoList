@@ -29,15 +29,10 @@ function validateUpdatedUser(user) {
   return valid;
 }
 
-function validateAssignment(assigned) {
+function validateAssignment(task) {
   let valid = true;
-  /*  valid = valid && assigned.user; */
-  return valid;
-}
-
-function validateNewUser(user) {
-  let valid = true;
-  valid = valid && user.user.length > 0;
+  valid = valid && task.assigned == true;
+  valid = valid && task.user;
   return valid;
 }
 
