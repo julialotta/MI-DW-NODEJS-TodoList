@@ -23,6 +23,7 @@
   top: -5%;
   z-index: -1;
 }
+
 .shape-blob.one {
   background: #8fb0a9;
   height: 500px;
@@ -130,8 +131,8 @@ footer {
 .border {
   border: black solid 1px;
   border-radius: 4px;
-  width: 60%;
-  min-height: 90%;
+  width: 65%;
+  min-height: 80%;
   margin: 20px 0;
   position: relative;
 }
@@ -142,7 +143,7 @@ header > div {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 50px 0;
+  padding: 40px 0 20px 0;
 }
 
 .header > a {
@@ -164,11 +165,18 @@ p,
 
 .menu {
   display: flex;
-  justify-content: space-around;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   margin-top: 20px;
-  margin-bottom: 10px;
-  width: 70%;
+  margin-bottom: 5px;
+  width: 80%;
   font-size: 20px;
+}
+
+.menu > div > a {
+  margin: 6px 40px;
 }
 
 .main > div {
@@ -180,22 +188,28 @@ p,
 }
 
 h2 {
-  font-size: 40px;
+  font-size: 35px;
+  text-align: center;
 }
 
+h3 {
+  padding-top: 15px;
+  text-align: center;
+}
 .create {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
+  margin: 10px;
 }
 
-input {
-  margin: 20px;
+.taskinput {
+  margin-bottom: 30px;
   background-image: url(/assets/noise.png);
   font-family: "Josefin Sans", sans-serif;
-  font-size: 17px;
-  padding: 12px;
+  font-size: 16px;
+  padding: 20px;
+  width: 250px;
   text-align: center;
   background-color: #8fb0a979;
   border: black 2px solid;
@@ -213,15 +227,19 @@ input[type="submit"]:hover {
   cursor: pointer;
 }
 
+input[type="submit"]:hover {
+  background-color: #8fb0a9;
+}
+
 input[type="checkbox"] {
   -webkit-appearance: none;
   border: black 2px solid;
   display: grid;
   place-content: center;
+  margin: 0 7px;
   padding: 7px;
   width: 20px;
   height: 20px;
-  margin: 0 0 0 12px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
@@ -235,25 +253,48 @@ input[type="checkbox"]:checked::before {
   transform: scale(0.9);
 }
 
+#selectuser,
+input {
+  background-image: url(/assets/noise.png);
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 13px;
+  padding: 8px;
+  margin: 5px;
+  text-align: center;
+  background-color: #8fb0a979;
+  border: black 2px solid;
+  border-radius: 4px;
+  box-shadow: 4px 4px 5px 0 rgba(100, 100, 111, 0.2);
+}
+
+#assign {
+  width: max-content;
+  margin-bottom: 10px;
+}
+
 footer {
   width: 100%;
   font-size: 13px;
   position: absolute;
-  bottom: 20px;
+  bottom: 10px;
+  text-align: center;
 }
 
 ul {
-  margin-top: 30px;
+  margin: 20px 0 45px 0;
 }
 
 li {
   list-style: none;
   font-size: 17px;
   padding: 5px 10px;
+  display: flex;
+  text-justify: newspaper;
 }
 
 a:hover {
   color: #385f5dc4;
+  cursor: pointer;
 }
 
 .noisy {
@@ -264,8 +305,8 @@ a:hover {
   width: 30%;
   justify-content: space-around;
   flex-direction: column;
-  margin-top: 25px;
-  margin-bottom: 10px;
+  margin-top: 15px;
+  margin-bottom: 40px;
 }
 
 .single-menu > a {
@@ -286,21 +327,7 @@ a:hover {
   margin: 20px;
   padding: 15px;
 }
-
-#description {
-  width: 320px;
-}
-
-#created {
-  width: 200px;
-  padding: 7px;
-}
-
-#done {
-  margin-top: 15px;
-}
-
-#submit {
-  background-color: #fbd166b1;
-  box-shadow: none;
+.edit > label,
+.edit > input[type="checkbox"] {
+  margin: 10px;
 }
