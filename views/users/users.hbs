@@ -1,0 +1,15 @@
+<h2>Users:</h2>
+<ul>
+  {{#each users}}
+    <li>
+      <a href="/user/{{_id}}">{{user}}
+      </a>
+    </li>
+  {{/each}}
+</ul>
+
+<h3>Create new user:</h3>
+<form action="/user/newuser" method="post" class="create">
+  <input type="text" name="user" />
+  <input type="submit" value="Create" id="assign" />
+</form>
