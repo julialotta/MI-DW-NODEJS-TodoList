@@ -7,13 +7,13 @@ const router = express.Router();
 const USER_COLLECTION = "users";
 const TODOS_COLLECTION = "todos";
 
-//GET /all users
+//GET All users
 router.get("/users", async (req, res) => {
   const users = await db.getUserCollection();
   res.render("users/users", { users });
 });
 
-// POST new user
+//POST New user
 router.post("/newuser", async (req, res) => {
   const newUser = {
     user: req.body.user,
@@ -28,7 +28,7 @@ router.post("/newuser", async (req, res) => {
   }
 });
 
-// GET single user
+//GET Single user
 router.get("/:id", async (req, res) => {
   const id = ObjectId(req.params.id);
   const database = await db.getDb();
@@ -46,7 +46,7 @@ router.get("/:id", async (req, res) => {
     });
 });
 
-// GET single user edit
+//GET Single user edit
 router.get("/:id/edit", async (req, res) => {
   const id = ObjectId(req.params.id);
   const database = await db.getDb();
@@ -55,7 +55,7 @@ router.get("/:id/edit", async (req, res) => {
   });
 });
 
-// POST single user edit
+//POST Single user edit
 router.post("/:id/edit", async (req, res) => {
   const id = ObjectId(req.params.id);
 
@@ -73,7 +73,7 @@ router.post("/:id/edit", async (req, res) => {
   }
 });
 
-//GET single user delete
+//GET Single user delete
 router.get("/:id/delete", async (req, res) => {
   const id = ObjectId(req.params.id);
   const database = await db.getDb();
@@ -82,7 +82,7 @@ router.get("/:id/delete", async (req, res) => {
   });
 });
 
-// POST single user delete
+//POST Single user delete
 router.post("/:id/delete", async (req, res) => {
   const id = ObjectId(req.params.id);
   const database = await db.getDb();
@@ -92,7 +92,6 @@ router.post("/:id/delete", async (req, res) => {
     .deleteOne({ _id: id }, async (err, user) => {
       for (let i = 0; i < todos.length; i++) {
         if (todos[i].assigned === true && todos[i].user._id.equals(id)) {
-          console.log("match");
           const taskId = ObjectId(todos[i]._id);
           const updateTask = {
             assigned: false,

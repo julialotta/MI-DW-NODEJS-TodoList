@@ -5,10 +5,10 @@
   </li>
 </ul>
 <h3>Assign tasks to someone:</h3>
-<form action="/{{task._id}}/assign" method="post" class="assignform">
+<form action="/{{task._id}}/assign" method="post" class="create">
   <select name="user" id="selectuser" required>
     {{#each users}}
-      <option value="" hidden>Select assignee</option>
+      <option value="" hidden>Select user</option>
       <option value="{{_id}}">{{user}}</option>
     {{/each}}
   </select>

@@ -6,7 +6,6 @@
     name="description"
     placeholder="description"
     value="{{description}}"
-    id="description"
   >
   <label for="created">Creation Date:</label>
   <input
@@ -14,7 +13,6 @@
     name="created"
     placeholder="created"
     value="{{created}}"
-    id="created"
     required
     >
   <label for="done">Change Status:</label>
@@ -23,9 +21,8 @@
     name="done" 
     value="{{done}}" 
     class="checkbox" 
-    id="done" {{#if done}}checked{{/if}}>
+  {{#if done}}checked{{/if}}>
   <input 
     type="submit" 
-    value="Edit Task" 
-    id="submit" >
+    value="Edit Task"  >
   </form>

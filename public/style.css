@@ -23,6 +23,7 @@
   top: -5%;
   z-index: -1;
 }
+
 .shape-blob.one {
   background: #8fb0a9;
   height: 500px;
@@ -130,7 +131,7 @@ footer {
 .border {
   border: black solid 1px;
   border-radius: 4px;
-  width: 60%;
+  width: 65%;
   min-height: 80%;
   margin: 20px 0;
   position: relative;
@@ -187,7 +188,7 @@ p,
 }
 
 h2 {
-  font-size: 40px;
+  font-size: 35px;
   text-align: center;
 }
 
@@ -195,6 +196,7 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 10px;
 }
 
 .taskinput {
@@ -221,15 +223,19 @@ input[type="submit"]:hover {
   cursor: pointer;
 }
 
+input[type="submit"]:hover {
+  background-color: #8fb0a9;
+}
+
 input[type="checkbox"] {
   -webkit-appearance: none;
   border: black 2px solid;
   display: grid;
   place-content: center;
+  margin: 0 7px;
   padding: 7px;
   width: 20px;
   height: 20px;
-  margin: 0 0 0 12px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
@@ -241,13 +247,6 @@ input[type="checkbox"]::before {
 
 input[type="checkbox"]:checked::before {
   transform: scale(0.9);
-}
-
-.assignform {
-  display: flex;
-  flex-direction: column;
-  margin: 10px;
-  align-items: center;
 }
 
 #selectuser,
@@ -263,20 +262,17 @@ input {
   border-radius: 4px;
   box-shadow: 4px 4px 5px 0 rgba(100, 100, 111, 0.2);
 }
+
 #assign {
   width: max-content;
   margin-bottom: 10px;
 }
-#assign:hover {
-  background-color: #8fb0a9;
-}
 
 footer {
-  width: 90%;
+  width: 100%;
   font-size: 13px;
   position: absolute;
   bottom: 10px;
-  margin: 0 5px;
   text-align: center;
 }
 
@@ -327,21 +323,7 @@ a:hover {
   margin: 20px;
   padding: 15px;
 }
-
-#description {
-  width: 320px;
-}
-
-#created {
-  width: 200px;
-  padding: 7px;
-}
-
-#done {
-  margin-top: 15px;
-}
-
-#submit {
-  background-color: #fbd166b1;
-  box-shadow: none;
+.edit > label,
+.edit > input[type="checkbox"] {
+  margin: 10px;
 }
