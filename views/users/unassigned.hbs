@@ -1,12 +1,14 @@
 <h2>Unassigned Tasks:</h2>
 <ul>
-  {{#each todos}}
-    {{#if assigned}}{{else}}
+  {{#each unassigned}}
       <li>
         <a href="/task/{{_id}}">{{description}}
         <input type="checkbox" name="done" disabled="disabled" value="{{done}}" class="checkbox"{{#if done}}checked{{/if}}>
         </a>
       </li>
-    {{/if}}
   {{/each}}
+  {{#unless unassigned}}
+    <h3>You don't have any unassigned tasks
+</h3>
+  {{/unless}} 
 </ul>

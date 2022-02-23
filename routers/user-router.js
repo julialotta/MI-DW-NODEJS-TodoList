@@ -24,7 +24,11 @@ router.post("/newuser", async (req, res) => {
     await database.collection(USER_COLLECTION).insertOne(newUser);
     res.redirect("/user/users");
   } else {
-    res.sendStatus(400);
+    const users = await db.getUserCollection();
+    res.render("users/users", {
+      error: "Data error",
+      users,
+    });
   }
 });
 

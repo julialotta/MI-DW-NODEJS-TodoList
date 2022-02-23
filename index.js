@@ -25,7 +25,9 @@ app.set("view engine", "hbs");
 
 app.use("/", taskRouter);
 app.use("/user", userRouter);
-
+app.use("/", (req, res) => {
+  res.status(400).render("not-found");
+});
 app.listen(8000, () => {
   console.log("http://localhost:8000");
 });
