@@ -15,13 +15,21 @@ router.get("/", async (req, res) => {
 //GET Uncompleted tasks
 router.get("/uncompletedtasks", async (req, res) => {
   const todos = await db.getTodoCollection();
-  res.render("tasks/uncompleted-tasks", { todos });
+  let uncompleted = [];
+  for (let i = 0; i < todos.length; i++) {
+    if (!todos[i].done) uncompleted.push(todos[i]);
+  }
+  res.render("tasks/uncompleted-tasks", { uncompleted });
 });
 
 //GET Completed tasks
 router.get("/completedtasks", async (req, res) => {
   const todos = await db.getTodoCollection();
-  res.render("tasks/completed-tasks", { todos });
+  let completed = [];
+  for (let i = 0; i < todos.length; i++) {
+    if (todos[i].done) completed.push(todos[i]);
+  }
+  res.render("tasks/completed-tasks", { completed });
 });
 
 //GET Assigned tasks. Tasks sorted in alphabetical user order.
@@ -38,7 +46,11 @@ router.get("/assigned", async (req, res) => {
 //GET Unassigned tasks
 router.get("/unassigned", async (req, res) => {
   const todos = await db.getTodoCollection();
-  res.render("users/unassigned", { todos });
+  let unassigned = [];
+  for (let i = 0; i < todos.length; i++) {
+    if (!todos[i].assigned) unassigned.push(todos[i]);
+  }
+  res.render("users/unassigned", { unassigned });
 });
 
 //GET Tasks sorted by descending time/date
@@ -69,7 +81,11 @@ router.post("/newtask", async (req, res) => {
     await database.collection(TODOS_COLLECTION).insertOne(newTodo);
     res.redirect("/");
   } else {
-    res.sendStatus(400);
+    const todos = await db.getTodoCollection();
+    res.render("home", {
+      error: "Data error",
+      todos,
+    });
   }
 });
 

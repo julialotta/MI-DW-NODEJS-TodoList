@@ -1,12 +1,13 @@
 <h2>Uncompleted Tasks:</h2>
 <ul>
-  {{#each todos}}
-    {{#if done}}{{else}}
+  {{#each uncompleted}}
       <li>
         <a href="/task/{{_id}}">{{created}} - {{description}}
         <input type="checkbox" name="done" disabled="disabled" value="{{done}}" class="checkbox"{{#if done}}checked{{/if}}>
         </a>
       </li>
-    {{/if}}
   {{/each}}
+  {{#unless uncompleted}}
+    <h3>You don't have any uncompleted tasks</h3>
+  {{/unless}} 
 </ul>

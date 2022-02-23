@@ -6,6 +6,10 @@
       </a>
     </li>
   {{/each}}
+  {{#unless users}}
+    <h3>There are no users</h3>
+  {{/unless}}
+  <h3>{{error}}</h3>
 </ul>
 
 <h3>Create new user:</h3>

@@ -1,16 +1,28 @@
 <h2>Your Task:</h2>
 <ul>
   <li class="single-task">
-    {{task.description}}
+    {{task.description}}<input 
+    type="checkbox" 
+    name="done" 
+    value="{{task.done}}" 
+    class="checkbox" 
+    disabled="disabled"
+  {{#if task.done}}checked{{/if}}>
   </li>
 </ul>
 <h3>Assign tasks to someone:</h3>
+{{#unless users}}
+  <a href="/user/users">Create User</a>{{/unless}}
+
 <form action="/{{task._id}}/assign" method="post" class="create">
   <select name="user" id="selectuser" required>
     {{#each users}}
       <option value="" hidden>Select user</option>
       <option value="{{_id}}">{{user}}</option>
     {{/each}}
+    {{#unless users}}
+      <option value="" hidden>There are no users</option>
+    {{/unless}}
   </select>
   <input type="submit" value="Assign" id="assign" />
 </form>
