@@ -13,7 +13,7 @@ Individual assignment at Medieinstitutet to create a Task Management App ☑ wit
 
 3. Create a .env\
 To run this application you need the following two things in a .env file:\
-CONNECTION_STRING="[Your mongoDB connectionstring]"\
+`CONNECTION_STRING="[Your mongoDB connectionstring]`
 
 4. Run Nodemon\
 `nodemon`
