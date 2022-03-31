@@ -1,14 +1,35 @@
-# MI-DW-NODEJS-TodoList
-Individual assignment at Medieinstitutet to create a Task Management App with Express & Handlebars.
+# Medieinstitutet Dynamic Web Development: Node JS To do app
+Individual assignment at Medieinstitutet to create a Task Management App ☑ with Express & Handlebars.
 
----
+![](./screenshot.png)
 
-## Assignment in the course Dynamic Web Development
 
----
+## Installation
+1. Clone the repo\
+`git clone https://github.com/julialotta/MI-NODEJS-TodoApp.git`
 
-### Assignment:
+2. Install npm packages\
+`npm install`
 
+3. Create a .env\
+To run this application you need the following two things in a .env file:\
+CONNECTION_STRING="[Your mongoDB connectionstring]"\
+
+4. Run Nodemon\
+`nodemon`
+
+Visit localhost:8000 to view the project
+
+## Built with
+- HTML & CSS
+- JavaScript
+- Node.js
+- Mongoose
+- Express.js
+- Handlebars
+
+## Details
+The assignment requirements was:
 - Create a TODO application with Express and Handlebars.
 - All Todo tasks should have the following attributes:
   - Id
@@ -19,3 +40,6 @@ Individual assignment at Medieinstitutet to create a Task Management App with Ex
 
 - User can chose to show all tasks, only done tasks (done=true) or not done tasks (done=false).
 - User can sort tasks after creation date, both newest → oldest and oldest → newest.
+
+## Contributors
+[Julia-Lotta Tinglöf](https://github.com/julialotta) </br>
